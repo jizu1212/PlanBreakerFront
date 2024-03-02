@@ -19,10 +19,7 @@ export default function Footer() {
           setValue(newValue);
         }}
         sx={{
-          display: "flex",
           justifyContent: "space-evenly",
-          height: "70px", // Adjust the height as needed
-          width: "100%",
         }}
       >
         <BottomNavigationAction
@@ -31,7 +28,6 @@ export default function Footer() {
           onClick={() => navigate("/profile")}
           sx={{
             border: "1px solid gray",
-            padding: "0",
             maxWidth: "none",
           }}
         />
@@ -41,7 +37,6 @@ export default function Footer() {
           onClick={() => navigate("/calendar")}
           sx={{
             border: "1px solid gray",
-            padding: "0",
             maxWidth: "none",
           }}
         />
@@ -51,7 +46,6 @@ export default function Footer() {
           onClick={() => navigate("/projects")}
           sx={{
             border: "1px solid gray",
-            padding: "0",
             maxWidth: "none",
           }}
         />
