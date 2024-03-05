@@ -8,8 +8,10 @@ import {
   Typography,
 } from "@mui/material";
 import React from "react";
-
-export default function UserAvatar() {
+import { clearUserInfo } from "../../../slices/userSlice";
+import { useDispatch } from "react-redux";
+const UserAvatar: React.FC = () => {
+  const dispatch = useDispatch();
   const settings = ["Profile", "Account", "Dashboard", "Logout"];
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
     null
@@ -21,6 +23,13 @@ export default function UserAvatar() {
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
+  };
+  const handleMenuItemClick = (setting: string) => {
+    if (setting === "Logout") {
+      dispatch(clearUserInfo());
+    }
+    // Add additional conditions for other settings if necessary
+    handleCloseUserMenu();
   };
   return (
     <Box>
@@ -46,11 +55,12 @@ export default function UserAvatar() {
         onClose={handleCloseUserMenu}
       >
         {settings.map((setting) => (
-          <MenuItem key={setting} onClick={handleCloseUserMenu}>
+          <MenuItem key={setting} onClick={() => handleMenuItemClick(setting)}>
             <Typography textAlign="center">{setting}</Typography>
           </MenuItem>
         ))}
       </Menu>
     </Box>
   );
-}
+};
+export default UserAvatar;

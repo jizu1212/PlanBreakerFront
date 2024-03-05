@@ -1,7 +1,5 @@
 export default interface UserDto {
-    username: string;
-    email: string;
-    password: string;
-  };
-
-
+  userName: string;
+  email: string;
+  password: string;
+}

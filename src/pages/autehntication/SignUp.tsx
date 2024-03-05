@@ -12,6 +12,9 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { signUp } from "../../service/authService";
+import UserDto from "../../types/UserDto";
+import { useNavigate } from "react-router-dom";
 
 function Copyright(props: any) {
   return (
@@ -35,13 +38,29 @@ function Copyright(props: any) {
 const defaultTheme = createTheme();
 
 export default function SignUp() {
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const navigate = useNavigate();
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+    const json: UserDto = {
+      userName: data.get("name") as string,
+      email: data.get("email") as string,
+      password: data.get("password") as string,
+    };
+
+    try {
+      const response = await signUp(json);
+      console.log("Sign up response", response);
+      if (response.success) {
+        navigate("/signUpSuccess");
+      } else {
+        navigate("/signUpFail");
+      }
+    } catch (error) {
+      console.error("Sign up error", error);
+      navigate("/signUpFailed");
+    }
   };
 
   return (

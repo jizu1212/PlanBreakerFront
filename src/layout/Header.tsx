@@ -6,12 +6,12 @@ import AdbIcon from "@mui/icons-material/Adb";
 import UserAvatar from "../components/presentational/auth/UserAvatar";
 import { Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { RootState } from "../store/reduxStore";
 
-const isLoggedIn = false;
-
-function ResponsiveAppBar() {
+const Header: React.FC = () => {
+  const userInfo = useSelector((state: RootState) => state.user.userInfo);
   const navigate = useNavigate();
-
   return (
     <AppBar position="static">
       <Box sx={{ pl: 2, pr: 2 }}>
@@ -70,7 +70,7 @@ function ResponsiveAppBar() {
           >
             LOGO
           </Typography>
-          {isLoggedIn ? (
+          {userInfo ? (
             <UserAvatar />
           ) : (
             <>
@@ -95,5 +95,5 @@ function ResponsiveAppBar() {
       </Box>
     </AppBar>
   );
-}
-export default ResponsiveAppBar;
+};
+export default Header;
