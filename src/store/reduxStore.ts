@@ -4,14 +4,12 @@ import userReducer from "../slices/userSlice";
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 
-// `userReducer`만 지속하기 위한 persist 설정
 const userPersistConfig = {
-  key: "root", // The key under which your application's state will be stored in localStorage
+  key: "user", // The key under which your application's state will be stored in localStorage
   storage, // The storage engine, localStorage in this case
-  whitelist: ["user"],
+  whitelist: ["userInfo"],
 };
 
-// `userReducer`에 persistReducer를 적용
 const persistedUserReducer = persistReducer(userPersistConfig, userReducer);
 
 export const reduxStore = configureStore({
